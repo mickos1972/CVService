@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.DomainModels;
 using CVService.Models;
 using DAL;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
@@ -24,21 +26,24 @@ namespace CVService.Controllers
         // GET: api/<CandidateController>
         [HttpGet]
         [Route("GetContactDetails")]
-        public List<NameView> Get()
+        public List<ContactDetailsViewModel> Get()
         {
             var result = _bll.getContactDetails();
-            return null;
+
+            var mappedObjects = result.Select(x => mapFromDomain(x)).ToList();
+
+            return mappedObjects;
         }
 
         // GET api/<CandidateController>/5
         //[HttpGet("{id}")]
         [HttpGet]
         [Route("GetContactDetailsById")]
-        public NameView Get(int id)
+        public ContactDetailsViewModel Get(int id)
         {
             //todo viewmodel with combo of contact, skill, list of workexperiences and a list of skills
             var result =  _bll.getContactDetailById(id);
-            return null;
+            return mapFromDomain(result);
         }
 
         // POST api/<CandidateController>
@@ -57,6 +62,24 @@ namespace CVService.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+
+        public static ContactDetailsViewModel mapFromDomain(ContactDomainModel source)
+        {
+            return new ContactDetailsViewModel
+            {
+                ContactId = source.ContactId,
+                firstName = source.firstName,
+                lastName = source.lastName,
+                emailAddress = source.emailAddress,
+                city = source.city,
+                street = source.street,
+                postCode = source.postCode,
+                SkillId = source.SkillId,
+                Skill = source.Skill,
+                WorkExperiences = source.WorkExperiences
+            };
         }
     }
 }
