@@ -19,7 +19,7 @@ namespace DAL
         public string city { get; set; }
         public string street { get; set; }
         public string postCode { get; set; }
-        public int SkillId { get; set; }
+        public int? SkillId { get; set; }
         // this full row isn't stored in the db EF Core goes and fetches it
         public Skills Skill { get; set; }
         // has a corresponding ContactID in the WorkExperience object

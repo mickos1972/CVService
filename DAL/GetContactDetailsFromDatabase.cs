@@ -11,8 +11,8 @@ namespace DAL
 {
     public class GeContactDetailsFromDatabase : IGetContactDetailsFromDatabase
     {
-    public GeContactDetailsFromDatabase()
-    {
+        public GeContactDetailsFromDatabase()
+        {
             ////Some Initial setup data
             //using CVContext context = new CVContext();
             //Skills skill = new Skills()

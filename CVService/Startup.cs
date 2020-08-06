@@ -28,11 +28,16 @@ namespace CVService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IGetAddress, GetAddress>();
             services.AddScoped<IGetSkills, GetSkills>();
             services.AddScoped<IGetWorkExperience, GetWorkExperience>();
             services.AddScoped<IGetContactDetailsFromDatabase, GeContactDetailsFromDatabase>();
             services.AddScoped<IGetContactDetailsBLL, GetContactDetailsBLL>();
+            services.AddScoped<IPostContactDetailsDAL, PostContactDetailsDAL>();
+            services.AddScoped<IPostContactDetailsBLL, PostContactDetailsBLL>();
+            services.AddScoped<IPostContactDetailsDAL, PostContactDetailsDAL>();
+            services.AddScoped<IUpdateContactDetailsDAL, UpdateContactDetailsDAL>();
+            services.AddScoped<IUpdateContactDetailsBLL, UpdateContactDetailsBLL>();
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
         }

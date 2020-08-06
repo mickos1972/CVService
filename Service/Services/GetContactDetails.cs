@@ -29,6 +29,7 @@ namespace Service
             return result.Select(mapResultsFromDAL).ToList();
         }
 
+        #region mapping
 
         public ContactDomainModel mapResultsFromDAL(Contact source)
         {
@@ -46,5 +47,7 @@ namespace Service
                 WorkExperiences = source.WorkExperiences
             };
         }
+
+        #endregion
     }
 }

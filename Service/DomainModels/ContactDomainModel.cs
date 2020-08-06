@@ -12,7 +12,7 @@ namespace BLL.DomainModels
         public string city { get; set; }
         public string street { get; set; }
         public string postCode { get; set; }
-        public int SkillId { get; set; }
+        public int? SkillId { get; set; }
         public Skills Skill { get; set; }
         public List<WorkExperience> WorkExperiences { get; set; }
     }
