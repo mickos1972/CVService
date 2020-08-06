@@ -2,9 +2,9 @@
 
 namespace DAL
 {
-    public interface IGetNamesFromDatabase
+    public interface IGetContactDetailsFromDatabase
     {
-        ContactDetails getName(int id);
-        List<ContactDetails> getNames();
+        Contact getContactDetailsById(int id);
+        List<Contact> getContactDetails();
     }
 }

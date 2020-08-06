@@ -26,7 +26,7 @@ namespace CVService.Controllers
         [Route("GetAllNames")]
         public List<NameView> Get()
         {
-            var result = _bll.getCustomerDetails();
+            var result = _bll.getContactDetails();
             return null;
         }
 
@@ -34,7 +34,8 @@ namespace CVService.Controllers
         [HttpGet("{id}")]
         public NameView Get(int id)
         {
-            var result =  _bll.getCustomerDetail(id);
+            //todo viewmodel with combo of contact, skill, list of workexperiences and a list of skills
+            var result =  _bll.getContactDetailsById(id);
             return null;
         }
 

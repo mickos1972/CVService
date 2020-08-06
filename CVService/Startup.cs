@@ -31,7 +31,7 @@ namespace CVService
             services.AddScoped<IGetAddress, GetAddress>();
             services.AddScoped<IGetSkills, GetSkills>();
             services.AddScoped<IGetWorkExperience, GetWorkExperience>();
-            services.AddScoped<IGetNamesFromDatabase, GetNamesFromDatabase>();
+            services.AddScoped<IGetContactDetailsFromDatabase, GeContactDetailsFromDatabase>();
             services.AddScoped<IGetContactDetailsBLL, GetContactDetailsBLL>();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();

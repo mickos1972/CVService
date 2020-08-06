@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(CVContext))]
-    [Migration("20200805103320_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200805222645_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,54 +21,22 @@ namespace DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DAL.Address", b =>
+            modelBuilder.Entity("DAL.Contact", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
 
                     b.Property<string>("city")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("postCode")
+                    b.Property<string>("emailAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("street")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Address");
-                });
-
-            modelBuilder.Entity("DAL.Email", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Email");
-                });
-
-            modelBuilder.Entity("DAL.Name", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("addressId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("emailAddressId")
-                        .HasColumnType("int");
 
                     b.Property<string>("firstName")
                         .IsRequired()
@@ -78,31 +46,30 @@ namespace DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("skillsId")
-                        .HasColumnType("int");
+                    b.Property<string>("postCode")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("street")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("addressId");
+                    b.HasKey("ContactId");
 
-                    b.HasIndex("emailAddressId");
+                    b.HasIndex("SkillId");
 
-                    b.HasIndex("skillsId");
-
-                    b.ToTable("Name");
+                    b.ToTable("Contact");
                 });
 
             modelBuilder.Entity("DAL.Skills", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SkillId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("skills")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SkillId");
 
                     b.ToTable("Skills");
                 });
@@ -114,7 +81,7 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("NameId")
+                    b.Property<int?>("ContactId")
                         .HasColumnType("int");
 
                     b.Property<string>("duties")
@@ -128,33 +95,25 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NameId");
+                    b.HasIndex("ContactId");
 
                     b.ToTable("WorkExperiences");
                 });
 
-            modelBuilder.Entity("DAL.Name", b =>
+            modelBuilder.Entity("DAL.Contact", b =>
                 {
-                    b.HasOne("DAL.Address", "address")
+                    b.HasOne("DAL.Skills", "Skill")
                         .WithMany()
-                        .HasForeignKey("addressId");
-
-                    b.HasOne("DAL.Email", "emailAddress")
-                        .WithMany()
-                        .HasForeignKey("emailAddressId")
+                        .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DAL.Skills", "skills")
-                        .WithMany()
-                        .HasForeignKey("skillsId");
                 });
 
             modelBuilder.Entity("DAL.WorkExperience", b =>
                 {
-                    b.HasOne("DAL.Name", null)
+                    b.HasOne("DAL.Contact", null)
                         .WithMany("workExperience")
-                        .HasForeignKey("NameId");
+                        .HasForeignKey("ContactId");
                 });
 #pragma warning restore 612, 618
         }

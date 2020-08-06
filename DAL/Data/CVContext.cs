@@ -4,7 +4,7 @@ namespace DAL.Data
 {
     public class CVContext : DbContext
     {
-        public DbSet<ContactDetails> ContactDetails { get; set; }
+        public DbSet<Contact> Contact { get; set; }
         public DbSet<Skills> Skills { get; set; }
         public DbSet<WorkExperience> WorkExperiences { get; set; }
 
@@ -27,12 +27,12 @@ namespace DAL.Data
         //    });
         //}
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ContactDetails>()
-                .HasOne(a => a.skills)
-                .WithOne(a => a.ContactDetails)
-                .HasForeignKey<Skills>(c => c.ContactsDetailsId);
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<ContactDetails>()
+        //        .HasOne(a => a.skills)
+        //        .WithOne(a => a.ContactDetails)
+        //        .HasForeignKey<Skills>(c => c.ContactsDetailsId);
+        //}
     }
 }

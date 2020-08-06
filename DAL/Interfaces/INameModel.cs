@@ -4,7 +4,7 @@ namespace DAL
 {
     public interface IGetNamesFromDatabaseINameModel
     {
-        List<ContactDetails> GetAllNames();
-        ContactDetails GetName(int id);
+        List<Contact> GetAllNames();
+        Contact GetName(int id);
     }
 }

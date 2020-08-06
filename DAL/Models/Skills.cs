@@ -1,14 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL
 {
     public class Skills
     {
-        public int Id { get; set; }
-        public string skills { get; set; }
+        [Key]
+        //[ForeignKey("SkillId")]
+        public int SkillId { get; set; }
+        public string Description { get; set; }
 
-        [ForeignKey("ContactsDetailsId")]
-        public int ContactsDetailsId { get; set; }
-        public ContactDetails ContactDetails { get; set; }
+        //[ForeignKey("ContactsDetailsId")]
+        ////public int ContactsDetailsId { get; set; }
+        //public ContactDetails ContactDetails { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(CVContext))]
-    [Migration("20200805154601_oneotone")]
-    partial class oneotone
+    [Migration("20200805224121_Initial2")]
+    partial class Initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,12 +21,15 @@ namespace DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DAL.ContactDetails", b =>
+            modelBuilder.Entity("DAL.Contact", b =>
                 {
-                    b.Property<int>("ContactsDetailsId")
+                    b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
 
                     b.Property<string>("city")
                         .HasColumnType("nvarchar(max)");
@@ -49,28 +52,29 @@ namespace DAL.Migrations
                     b.Property<string>("street")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ContactsDetailsId");
+                    b.HasKey("ContactId");
 
-                    b.ToTable("ContactDetails");
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("Contact");
                 });
 
             modelBuilder.Entity("DAL.Skills", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SkillId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ContactsDetailsId")
+                    b.Property<int?>("ContactId")
                         .HasColumnType("int");
 
-                    b.Property<string>("skills")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SkillId");
 
-                    b.HasIndex("ContactsDetailsId")
-                        .IsUnique();
+                    b.HasIndex("ContactId");
 
                     b.ToTable("Skills");
                 });
@@ -82,7 +86,7 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ContactDetailsContactsDetailsId")
+                    b.Property<int>("ContactId")
                         .HasColumnType("int");
 
                     b.Property<string>("duties")
@@ -96,25 +100,34 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContactDetailsContactsDetailsId");
+                    b.HasIndex("ContactId");
 
                     b.ToTable("WorkExperiences");
                 });
 
-            modelBuilder.Entity("DAL.Skills", b =>
+            modelBuilder.Entity("DAL.Contact", b =>
                 {
-                    b.HasOne("DAL.ContactDetails", "ContactDetails")
-                        .WithOne("skills")
-                        .HasForeignKey("DAL.Skills", "ContactsDetailsId")
+                    b.HasOne("DAL.Skills", "Skill")
+                        .WithMany()
+                        .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DAL.Skills", b =>
+                {
+                    b.HasOne("DAL.Contact", null)
+                        .WithMany("Skillses")
+                        .HasForeignKey("ContactId");
+                });
+
             modelBuilder.Entity("DAL.WorkExperience", b =>
                 {
-                    b.HasOne("DAL.ContactDetails", null)
-                        .WithMany("workExperience")
-                        .HasForeignKey("ContactDetailsContactsDetailsId");
+                    b.HasOne("DAL.Contact", null)
+                        .WithMany("WorkExperiences")
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

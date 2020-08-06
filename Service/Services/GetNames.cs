@@ -6,23 +6,23 @@ namespace Service
 {
     public class GetContactDetailsBLL : IGetContactDetailsBLL
     {
-        IGetNamesFromDatabase _getNamesDAL;
+        IGetContactDetailsFromDatabase _getNamesDAL;
 
-        public GetContactDetailsBLL(IGetNamesFromDatabase getNamesDAL)
+        public GetContactDetailsBLL(IGetContactDetailsFromDatabase getNamesDAL)
         {
             _getNamesDAL = getNamesDAL;
         }
         
 
-        public object getCustomerDetail(int id)
+        public object getContactDetailsById(int id)
         {
-            var result = _getNamesDAL.getName(id);
+            var result = _getNamesDAL.getContactDetailsById(id);
             return null;
         }
 
-        public List<object> getCustomerDetails()
+        public List<object> getContactDetails()
         {
-            var result = _getNamesDAL.getNames();
+            var result = _getNamesDAL.getContactDetails();
 
 
             return null;

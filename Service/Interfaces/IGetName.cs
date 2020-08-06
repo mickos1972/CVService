@@ -5,7 +5,7 @@ namespace Service
 {
     public interface IGetContactDetailsBLL
     {
-        object getCustomerDetail(int id);
-        List<object> getCustomerDetails();
+        object getContactDetailsById(int id);
+        List<object> getContactDetails();
     }
 }
