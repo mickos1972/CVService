@@ -13,17 +13,17 @@ namespace CVService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CandidateNameController : ControllerBase
+    public class ContactDetailsController : ControllerBase
     {
         private readonly IGetContactDetailsBLL _bll;
-        public CandidateNameController(IGetContactDetailsBLL bll)
+        public ContactDetailsController(IGetContactDetailsBLL bll)
         {
             _bll = bll;
         }
 
         // GET: api/<CandidateController>
         [HttpGet]
-        [Route("GetAllNames")]
+        [Route("GetContactDetails")]
         public List<NameView> Get()
         {
             var result = _bll.getContactDetails();
@@ -31,11 +31,13 @@ namespace CVService.Controllers
         }
 
         // GET api/<CandidateController>/5
-        [HttpGet("{id}")]
+        //[HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetContactDetailsById")]
         public NameView Get(int id)
         {
             //todo viewmodel with combo of contact, skill, list of workexperiences and a list of skills
-            var result =  _bll.getContactDetailsById(id);
+            var result =  _bll.getContactDetailById(id);
             return null;
         }
 

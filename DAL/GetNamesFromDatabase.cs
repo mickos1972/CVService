@@ -57,20 +57,17 @@ namespace DAL
         {
             using CVContext context = new CVContext();
 
-            var result  = context.Contact
-                .Include(c => c.Skill)
-                .Include(v => v.WorkExperiences)
-                .Single(x => x.ContactId == id);
-            
+            //var result  = context.Contact
+            //    .Include(c => c.Skill)
+            //    .Include(v => v.WorkExperiences)
+            //    .Single(x => x.ContactId == id);
 
-            return null;
-            
+            return context.Contact.Single(x => x.ContactId == id);
         }
 
         public List<Contact> getContactDetails()
         {
             using CVContext context = new CVContext();
-
 
             var results = context.Contact.ToList();
 
