@@ -37,6 +37,8 @@ namespace CVService
             services.AddScoped<IPostContactDetailsDAL, PostContactDetailsDAL>();
             services.AddScoped<IUpdateContactDetailsDAL, UpdateContactDetailsDAL>();
             services.AddScoped<IUpdateContactDetailsBLL, UpdateContactDetailsBLL>();
+            services.AddScoped<IDeleteContactDetailsDAL, DeleteContactDetailsDAL>();
+            services.AddScoped<IDeleteContactDetailsBLL, DeleteContactDetailsBLL>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();

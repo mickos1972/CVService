@@ -20,11 +20,13 @@ namespace CVService.Controllers
         private readonly IGetContactDetailsBLL _getContactDetailsBLL;
         private readonly IPostContactDetailsBLL _postContactDetailsBLL;
         private readonly IUpdateContactDetailsBLL _updateContactDetailsBLL;
-        public ContactDetailsController(IGetContactDetailsBLL getContactDetailsBLL, IPostContactDetailsBLL postContactDetailsBLL, IUpdateContactDetailsBLL updateContactDetailsBLL)
+        private readonly IDeleteContactDetailsBLL _deleteContactDetailsBLL;
+        public ContactDetailsController(IGetContactDetailsBLL getContactDetailsBLL, IPostContactDetailsBLL postContactDetailsBLL, IUpdateContactDetailsBLL updateContactDetailsBLL, IDeleteContactDetailsBLL deleteContactDetailsBLL)
         {
             _getContactDetailsBLL = getContactDetailsBLL;
             _postContactDetailsBLL = postContactDetailsBLL;
             _updateContactDetailsBLL = updateContactDetailsBLL;
+            _deleteContactDetailsBLL = deleteContactDetailsBLL;
         }
 
         // GET: api/<CandidateController>
@@ -68,6 +70,7 @@ namespace CVService.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _deleteContactDetailsBLL.deleteContactDetailsBLL(id);
         }
 
         #region mapping
