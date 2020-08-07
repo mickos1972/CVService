@@ -1,4 +1,6 @@
-﻿using DAL.Data;
+﻿using System;
+using DAL.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL
 {
@@ -6,13 +8,22 @@ namespace DAL
     {
         public void deleteContactDetailsDAL(int id)
         {
-            using var context = new CVContext();
+            try
+            {
+                using var context = new CVContext();
 
-            var contact = new Contact { ContactId = id };
+                var contact = new Contact { ContactId = id };
 
-            context.Remove(contact);
+                context.Remove(contact);
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                //this would be replaced with real logging
+                Console.WriteLine(e.InnerException.Message);
+                throw;
+            }
         }
     }
 }

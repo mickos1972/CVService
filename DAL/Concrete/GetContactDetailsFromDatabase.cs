@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DAL.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL
 {
@@ -8,65 +10,82 @@ namespace DAL
     {
         public GeContactDetailsFromDatabase()
         {
-            ////Some Initial setup data
+            //Some Initial setup data
             //using CVContext context = new CVContext();
-            //Skills skill = new Skills()
+
+            //var skill = new Skills()
             //{
-            //    Description = "I can do loads get me!"
+            //    Description = "c++"
             //};
+
             //context.Add(skill);
             //context.SaveChanges();
 
-            //Contact tracy = new Contact()
+            //var bobba = new Contact()
             //{
-            //    firstName = "test55",
-            //    lastName = "ball",
-            //    emailAddress = "emailAddress4",
+            //    firstName = "bobba",
+            //    lastName = "fett",
+            //    emailAddress = "bounter@hunters.com",
             //    SkillId = 1,
-            //    WorkExperiences = new List<WorkExperience>()
+            //    WorkExperiences = new List<WorkExperienceDAL>()
             //};
-            //context.Add(tracy);
+
+            //context.Add(bobba);
             //context.SaveChanges();
 
-            //WorkExperience wok = new WorkExperience()
+            //var work = new WorkExperienceDAL()
             //{
             //    from = DateTime.Today,
             //    to = DateTime.Today.AddDays(6),
-            //    duties = "slacking off",
+            //    duties = "hunting smugglers",
             //    ContactId = 1
             //};
-            //context.Add(wok);
+            //context.Add(work);
             //context.SaveChanges();
-            //WorkExperience wok2 = new WorkExperience()
+
+            //var work2 = new WorkExperienceDAL()
             //{
             //    from = DateTime.Today,
             //    to = DateTime.Today.AddDays(3),
-            //    duties = "slacking off2",
+            //    duties = "looking cool",
             //    ContactId = 1
             //};
-            //context.Add(wok2);
+            //context.Add(work2);
             //context.SaveChanges();
         }
 
         public Contact getContactDetailsById(int id)
         {
-            using CVContext context = new CVContext();
+            try
+            {
+                using var context = new CVContext();
 
-            //var result  = context.Contact
-            //    .Include(c => c.Skill)
-            //    .Include(v => v.WorkExperiences)
-            //    .Single(x => x.ContactId == id);
-
-            return context.Contact.Single(x => x.ContactId == id);
+                return context.Contact.Single(x => x.ContactId == id);
+            }
+            catch (DbUpdateException e)
+            {
+                //this would be replaced with real logging
+                Console.WriteLine(e.InnerException.Message);
+                throw;
+            }
         }
 
         public List<Contact> getContactDetails()
         {
-            using CVContext context = new CVContext();
+            try
+            {
+                using var context = new CVContext();
 
-            var results = context.Contact.ToList();
+                var results = context.Contact.ToList();
 
-            return results;
+                return results;
+            }
+            catch (DbUpdateException e)
+            {
+                //this would be replaced with real logging
+                Console.WriteLine(e.InnerException.Message);
+                throw;
+            }
         }
     }
 }

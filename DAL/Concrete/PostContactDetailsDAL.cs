@@ -1,4 +1,6 @@
-﻿using DAL.Data;
+﻿using System;
+using DAL.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL
 {
@@ -6,11 +8,20 @@ namespace DAL
     {
         public void postContactDetails(Contact newContactDetails)
         {
-            using var context = new CVContext();
+            try
+            {
+                using var context = new CVContext();
 
-            context.Add(newContactDetails);
+                context.Add(newContactDetails);
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                //this would be replaced with real logging
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

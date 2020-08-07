@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DAL.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,19 +9,28 @@ namespace DAL
     {
         public void postContactDetailsDAL(WorkExperienceDAL workExperience)
         {
-            using var context = new CVContext();
+            try
+            {
+                using var context = new CVContext();
 
-            context.Add(workExperience);
+                context.Add(workExperience);
 
-            context.SaveChanges();
+                context.SaveChanges();
 
-            var contact = context.Contact.Single(x => x.ContactId == workExperience.ContactId);
+                var contact = context.Contact.Single(x => x.ContactId == workExperience.ContactId);
 
-            contact.WorkExperiences.Add(workExperience);
+                contact.WorkExperiences.Add(workExperience);
 
-            context.Update(contact);
+                context.Update(contact);
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                //this would be replaced with real logging
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

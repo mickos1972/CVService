@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using DAL.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,24 +9,37 @@ namespace DAL
     {
         public Skills GetSkillById(int id)
         {
-            using var context = new CVContext();
+            try
+            {
+                using var context = new CVContext();
 
-            //var result  = context.Contact
-            //    .Include(c => c.Skill)
-            //    .Include(v => v.WorkExperiences)
-            //    .Single(x => x.ContactId == id);
-
-            return context.Skills.Single(x => x.SkillId == id);
+                return context.Skills.Single(x => x.SkillId == id);
+            }
+            catch (DbUpdateException e)
+            {
+                //this would be replaced with real logging
+                Console.WriteLine(e.InnerException.Message);
+                throw;
+            }
         }
 
         public Skills GetSkillByContactId(int ContactId)
         {
-            using var context = new CVContext();
+            try
+            {
+                using var context = new CVContext();
 
-            var result = context.Contact
-                .Include(c => c.Skill).Single(x => x.ContactId == ContactId).Skill;
+                var result = context.Contact
+                    .Include(c => c.Skill).Single(x => x.ContactId == ContactId).Skill;
 
-            return result;
+                return result;
+            }
+            catch (DbUpdateException e)
+            {
+                //this would be replaced with real logging
+                Console.WriteLine(e.InnerException.Message);
+                throw;
+            }
         }
     }
 }

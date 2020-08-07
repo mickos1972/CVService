@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DAL.Data;
 using Microsoft.EntityFrameworkCore;
@@ -9,11 +10,20 @@ namespace DAL
     {
         public List<WorkExperienceDAL> getWorkExperienceByContactIdDAL(int contactId)
         {
-            using var context = new CVContext();
+            try
+            {
+                using var context = new CVContext();
 
-            var result = context.WorkExperiences.Where(x => x.ContactId == contactId).ToList();
+                var result = context.WorkExperiences.Where(x => x.ContactId == contactId).ToList();
 
-            return result;
+                return result;
+            }
+            catch (DbUpdateException e)
+            {
+                //this would be replaced with real logging
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }
