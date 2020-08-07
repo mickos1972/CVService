@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using BLL.DomainModels;
+﻿using BLL.DomainModels;
 using CVService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Service;
@@ -25,13 +20,6 @@ namespace CVService.Controllers
             _postSkillBLL = postSkillBLL;
         }
 
-        //// GET: api/<SkillController>
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
         // GET api/<SkillController>/5
         [HttpGet]
         [Route("GetSkillByContactDetails/{id}")]
@@ -40,12 +28,6 @@ namespace CVService.Controllers
              var result = _skillBLL.getSkillsBLL(id);
 
              return MapFromDomain(result);
-        }
-
-        // POST api/<SkillController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
         }
 
         [HttpPost]
@@ -57,17 +39,6 @@ namespace CVService.Controllers
             _postSkillBLL.postSkillBLL(contactId, result);
         }
 
-        //// PUT api/<SkillController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE api/<SkillController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
 
         #region MyRegion
 
