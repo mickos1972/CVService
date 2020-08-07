@@ -6,7 +6,7 @@ namespace DAL.Data
     {
         public DbSet<Contact> Contact { get; set; }
         public DbSet<Skills> Skills { get; set; }
-        public DbSet<WorkExperience> WorkExperiences { get; set; }
+        public DbSet<WorkExperienceDAL> WorkExperiences { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

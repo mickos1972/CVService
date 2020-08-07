@@ -23,6 +23,6 @@ namespace DAL
         // this full row isn't stored in the db EF Core goes and fetches it
         public Skills Skill { get; set; }
         // has a corresponding ContactID in the WorkExperience object
-        public List<WorkExperience> WorkExperiences { get; set; }
+        public List<WorkExperienceDAL> WorkExperiences { get; set; }
     }
 }

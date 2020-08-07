@@ -2,7 +2,7 @@
 
 namespace DAL
 {
-    public class WorkExperience
+    public class WorkExperienceDAL
     {
         public int Id { get; set; }
         public DateTime from { get; set; }
