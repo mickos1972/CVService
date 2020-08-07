@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace BLL.DomainModels
+namespace CVService.Models
 {
-    public class WorkExperienceDomainModel
+    public class WorkExperienceViewModel
     {
         public int Id { get; set; }
         public DateTime from { get; set; }

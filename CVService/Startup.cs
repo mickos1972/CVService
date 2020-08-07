@@ -21,7 +21,7 @@ namespace CVService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddScoped<IGetWorkExperience, GetWorkExperience>();
+            services.AddScoped<IGetWorkExperienceByContactIdBLL, GetWorkExperienceByContactIdBLL>();
             services.AddScoped<IGetContactDetailsFromDatabase, GeContactDetailsFromDatabase>();
             services.AddScoped<IGetContactDetailsBLL, GetContactDetailsBLL>();
             services.AddScoped<IPostContactDetailsDAL, PostContactDetailsDAL>();
@@ -36,6 +36,9 @@ namespace CVService
             services.AddScoped<IPostSkillDAL, PostSkillDAL>();
             services.AddScoped<IPostSkillBLL, PostSkillBLL>();
             services.AddScoped<IPostWorkExperienceDAL, PostWorkExperienceDAL>();
+            services.AddScoped<IPostWorkExperienceBLL, PostWorkExperienceBLL>();
+            services.AddScoped<IGetWorkExperienceByContactIdBLL, GetWorkExperienceByContactIdBLL>();
+            services.AddScoped<IGetWorkExperienceByContactIdDAL, GetWorkExperienceByContactIdDAL>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();

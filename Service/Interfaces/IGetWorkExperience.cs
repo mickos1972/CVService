@@ -1,7 +1,10 @@
-﻿namespace Service
+﻿using System.Collections.Generic;
+using BLL.DomainModels;
+
+namespace Service
 {
-    public interface IGetWorkExperience
+    public interface IGetWorkExperienceByContactIdBLL
     {
-        void getWorkExperience(int id);
+        List<WorkExperienceDomainModel> getWorkExperienceByContactIdBLL(int id);
     }
 }
