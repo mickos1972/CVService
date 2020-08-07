@@ -11,8 +11,8 @@ namespace CVService.Controllers
     [ApiController]
     public class SkillController : ControllerBase
     {
-        private IGetSkillsBLL _skillBLL;
-        private IPostSkillBLL _postSkillBLL;
+        private readonly IGetSkillsBLL _skillBLL;
+        private readonly IPostSkillBLL _postSkillBLL;
 
         public SkillController(IGetSkillsBLL skillBLL, IPostSkillBLL postSkillBLL)
         {
