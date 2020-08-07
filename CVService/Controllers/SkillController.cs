@@ -22,7 +22,7 @@ namespace CVService.Controllers
 
         // GET api/<SkillController>/5
         [HttpGet]
-        [Route("GetSkillByContactDetails/{id}")]
+        [Route("GetSkillByContactDetailsId/{id}")]
         public SkillViewModel Get(int id)
         {
              var result = _skillBLL.getSkillsBLL(id);
@@ -31,7 +31,7 @@ namespace CVService.Controllers
         }
 
         [HttpPost]
-        [Route("PostSkillByContactDetails/{contactId}")]
+        [Route("PostSkillByContactDetailsId/{contactId}")]
         public void Post([FromBody] SkillViewModel value, int contactId)
         {
             var result = MapToDomain(value);

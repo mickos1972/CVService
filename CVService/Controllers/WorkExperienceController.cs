@@ -17,8 +17,8 @@ namespace CVService.Controllers
     [ApiController]
     public class WorkExperienceController : ControllerBase
     {
-        private IPostWorkExperienceBLL _postWorkExperienceBll;
-        private IGetWorkExperienceByContactIdBLL _getWorkExperienceByContactId;
+        private readonly IPostWorkExperienceBLL _postWorkExperienceBll;
+        private readonly IGetWorkExperienceByContactIdBLL _getWorkExperienceByContactId;
 
         public WorkExperienceController(IPostWorkExperienceBLL postWorkExperienceBll, IGetWorkExperienceByContactIdBLL getWorkExperienceByContactId)
         {
@@ -26,16 +26,9 @@ namespace CVService.Controllers
             _getWorkExperienceByContactId = getWorkExperienceByContactId;
         }
 
-
-        // GET: api/<WorkExperienceController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET api/<WorkExperienceController>/5
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetWorkExperienceByContactId/{id}")]
         public List<WorkExperienceViewModel> Get(int id)
         {
             var result = _getWorkExperienceByContactId.getWorkExperienceByContactIdBLL(id);
@@ -45,9 +38,10 @@ namespace CVService.Controllers
 
         // POST api/<WorkExperienceController>
         [HttpPost]
-        public void Post([FromBody] WorkExperienceViewModel value)
+        [Route("PostWorkExperienceByContactId")]
+        public void Post([FromBody] WorkExperienceViewModel workExperience)
         {
-            var result = mapToDomain(value);
+            var result = mapToDomain(workExperience);
 
             _postWorkExperienceBll.postWorkExperienceBLL(result);
         }
