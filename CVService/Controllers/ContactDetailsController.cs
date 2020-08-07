@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BLL.DomainModels;
 using CVService.Models;
-using DAL;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
@@ -54,20 +50,25 @@ namespace CVService.Controllers
 
         // POST api/<CandidateController>
         [HttpPost]
+        [Route("PostContactDetail")]
         public void Post([FromBody] ContactDetailsViewModel value)
         {
             _postContactDetailsBLL.postContactDetailsBLL(mapToDomain(value));
         }
 
         // PUT api/<CandidateController>/5
-        [HttpPut("{id}")]
+        //[HttpPut("{id}")]
+        [HttpPut]
+        [Route("UpdateContactDetailById/{id}")]
         public void Put(int id, [FromBody] ContactDetailsViewModel value)
         {
             _updateContactDetailsBLL.updateContactDetailsBLL(mapToDomain(value, id));
         }
 
         // DELETE api/<CandidateController>/5
-        [HttpDelete("{id}")]
+        //[HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("DeleteContactDetailById/{id}")]
         public void Delete(int id)
         {
             _deleteContactDetailsBLL.deleteContactDetailsBLL(id);
