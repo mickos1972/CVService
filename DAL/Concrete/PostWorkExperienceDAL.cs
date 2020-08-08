@@ -7,7 +7,7 @@ namespace DAL
 {
     public class PostWorkExperienceDAL : IPostWorkExperienceDAL
     {
-        public void postContactDetailsDAL(WorkExperienceDAL workExperience)
+        public WorkExperienceDAL postContactDetailsDAL(WorkExperienceDAL workExperience)
         {
             try
             {
@@ -24,6 +24,8 @@ namespace DAL
                 context.Update(contact);
 
                 context.SaveChanges();
+
+                return workExperience;
             }
             catch (DbUpdateException e)
             {

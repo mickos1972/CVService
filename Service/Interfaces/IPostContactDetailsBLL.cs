@@ -4,6 +4,6 @@ namespace Service
 {
     public interface IPostContactDetailsBLL
     {
-        void postContactDetailsBLL(ContactDomainModel contactDetails);
+        ContactDomainModel postContactDetailsBLL(ContactDomainModel contactDetails);
     }
 }

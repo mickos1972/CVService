@@ -13,11 +13,13 @@ namespace Service
             _postWorkExperienceDAL = postWorkExperienceDAL;
         }
 
-        public void postWorkExperienceBLL(WorkExperienceDomainModel work)
+        public WorkExperienceDomainModel postWorkExperienceBLL(WorkExperienceDomainModel work)
         {
             var result = mapToDalModel(work);
 
-            _postWorkExperienceDAL.postContactDetailsDAL(result);
+            var newWorkExperience = _postWorkExperienceDAL.postContactDetailsDAL(result);
+
+            return mapFromDALModel(newWorkExperience);
         }
 
         #region mapping
@@ -25,6 +27,18 @@ namespace Service
         private WorkExperienceDAL mapToDalModel(WorkExperienceDomainModel source)
         {
             return new WorkExperienceDAL
+            {
+                Id = source.Id,
+                from = source.from,
+                to = source.to,
+                duties = source.duties,
+                ContactId = source.ContactId
+            };
+        }
+
+        private WorkExperienceDomainModel mapFromDALModel(WorkExperienceDAL source)
+        {
+            return new WorkExperienceDomainModel
             {
                 Id = source.Id,
                 from = source.from,

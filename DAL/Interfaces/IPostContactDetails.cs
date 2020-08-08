@@ -2,6 +2,6 @@
 {
     public interface IPostContactDetailsDAL
     {
-        void postContactDetails(Contact contact);
+        Contact postContactDetails(Contact contact);
     }
 }

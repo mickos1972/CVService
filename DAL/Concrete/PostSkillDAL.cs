@@ -7,7 +7,7 @@ namespace DAL
 {
     public class PostSkillDAL : IPostSkillDAL
     {
-        public void postSkillDAL(int contactDetailId, Skills source)
+        public Skills postSkillDAL(int contactDetailId, Skills source)
         {
             try
             {
@@ -23,6 +23,8 @@ namespace DAL
 
                 context.Update(contact);
                 context.SaveChanges();
+
+                return source;
             }
             catch (DbUpdateException e)
             {

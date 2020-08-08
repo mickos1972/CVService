@@ -2,6 +2,6 @@
 {
     public interface IPostSkillDAL
     {
-        void postSkillDAL(int contactDetailId, Skills source);
+        Skills postSkillDAL(int contactDetailId, Skills source);
     }
 }

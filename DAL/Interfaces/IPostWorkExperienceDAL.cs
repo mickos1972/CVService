@@ -2,6 +2,6 @@
 {
     public interface IPostWorkExperienceDAL
     {
-        void postContactDetailsDAL(WorkExperienceDAL workExperience);
+        WorkExperienceDAL postContactDetailsDAL(WorkExperienceDAL workExperience);
     }
 }

@@ -32,15 +32,17 @@ namespace CVService.Controllers
 
         [HttpPost]
         [Route("PostSkillByContactDetailsId/{contactId}")]
-        public void Post([FromBody] SkillViewModel value, int contactId)
+        public SkillViewModel Post([FromBody] SkillViewModel value, int contactId)
         {
             var result = MapToDomain(value);
 
-            _postSkillBLL.postSkillBLL(contactId, result);
+            var newSkill = _postSkillBLL.postSkillBLL(contactId, result);
+
+            return MapFromDomain(newSkill);
         }
 
 
-        #region MyRegion
+        #region Mapping
 
         private static SkillViewModel MapFromDomain(SkillDomainModel source)
         {

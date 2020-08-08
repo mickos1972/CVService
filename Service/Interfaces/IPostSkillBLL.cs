@@ -4,6 +4,6 @@ namespace Service
 {
     public interface IPostSkillBLL
     {
-        void postSkillBLL(int ContactId, SkillDomainModel skill);
+        SkillDomainModel postSkillBLL(int ContactId, SkillDomainModel skill);
     }
 }

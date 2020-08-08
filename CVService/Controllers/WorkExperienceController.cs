@@ -36,11 +36,13 @@ namespace CVService.Controllers
         // POST api/<WorkExperienceController>
         [HttpPost]
         [Route("PostWorkExperienceByContactId")]
-        public void Post([FromBody] WorkExperienceViewModel workExperience)
+        public WorkExperienceViewModel Post([FromBody] WorkExperienceViewModel workExperience)
         {
             var result = mapToDomain(workExperience);
 
-            _postWorkExperienceBll.postWorkExperienceBLL(result);
+            var newWorkExerience = _postWorkExperienceBll.postWorkExperienceBLL(result);
+
+            return mapFromDomain(newWorkExerience);
         }
 
         #region mappings

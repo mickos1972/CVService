@@ -4,6 +4,6 @@ namespace Service
 {
     public interface IPostWorkExperienceBLL
     {
-        void postWorkExperienceBLL(WorkExperienceDomainModel work);
+        WorkExperienceDomainModel postWorkExperienceBLL(WorkExperienceDomainModel work);
     }
 }

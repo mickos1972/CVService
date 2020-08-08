@@ -12,18 +12,29 @@ namespace Service
             _postSkillDAL = postSkillDAL;
         }
 
-        public void postSkillBLL(int ContactId, SkillDomainModel skill)
+        public SkillDomainModel postSkillBLL(int ContactId, SkillDomainModel skill)
         {
             var result = mapToDal(skill);
 
-            _postSkillDAL.postSkillDAL(ContactId, result);
+            var newSkill = _postSkillDAL.postSkillDAL(ContactId, result);
+
+            return mapFromDal(newSkill);
         }
 
-        #region MyRegion
+        #region mapping
 
         private Skills mapToDal(SkillDomainModel source)
         {
             return new Skills
+            {
+                SkillId = source.SkillId,
+                Description = source.Description
+            };
+        }
+
+        private SkillDomainModel mapFromDal(Skills source)
+        {
+            return new SkillDomainModel
             {
                 SkillId = source.SkillId,
                 Description = source.Description

@@ -6,7 +6,7 @@ namespace DAL
 {
     public class PostContactDetailsDAL : IPostContactDetailsDAL
     {
-        public void postContactDetails(Contact newContactDetails)
+        public Contact postContactDetails(Contact newContactDetails)
         {
             try
             {
@@ -15,6 +15,8 @@ namespace DAL
                 context.Add(newContactDetails);
 
                 context.SaveChanges();
+
+                return newContactDetails;
             }
             catch (DbUpdateException e)
             {

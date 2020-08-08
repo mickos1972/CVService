@@ -51,9 +51,11 @@ namespace CVService.Controllers
         // POST api/<CandidateController>
         [HttpPost]
         [Route("PostContactDetail")]
-        public void Post([FromBody] ContactDetailsViewModel value)
+        public ContactDetailsViewModel Post([FromBody] ContactDetailsViewModel value)
         {
-            _postContactDetailsBLL.postContactDetailsBLL(mapToDomain(value));
+            var result = _postContactDetailsBLL.postContactDetailsBLL(mapToDomain(value));
+
+            return mapFromDomain(result);
         }
 
         // PUT api/<CandidateController>/5
