@@ -12,7 +12,7 @@ namespace Service
             _getSkillsDAL = getSkillsDAL;
         }
 
-        public SkillDomainModel getSkillsBLL(int contactId)
+        public SkillDomainModel getSkillsByIdBLL(int contactId)
         {
             var result = _getSkillsDAL.GetSkillByContactId(contactId);
 

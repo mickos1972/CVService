@@ -25,7 +25,7 @@ namespace CVService.Controllers
         [Route("GetSkillByContactDetailsId/{id}")]
         public SkillViewModel Get(int id)
         {
-             var result = _skillBLL.getSkillsBLL(id);
+             var result = _skillBLL.getSkillsByIdBLL(id);
 
              return MapFromDomain(result);
         }

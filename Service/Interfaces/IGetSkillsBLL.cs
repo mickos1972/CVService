@@ -4,6 +4,6 @@ namespace Service
 {
     public interface IGetSkillsBLL
     {
-        SkillDomainModel getSkillsBLL(int contactId);
+        SkillDomainModel getSkillsByIdBLL(int contactId);
     }
 }
